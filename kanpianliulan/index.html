@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>看片浏览器-看片浏览器网页版入口_看片浏览器在线看片播放体验</title>
+<meta name="description" content="看片浏览器是一款内置视频播放能力的浏览器工具，支持网页视频直接播放、多标签管理、清晰度切换与无痕浏览。本页说明看片浏览器的核心功能、使用场景与常见问题，帮助你了解在线看片播放的实际体验。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101826'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%234fd1c5' stroke-width='3'/%3E%3Cpath d='M27 23l14 9-14 9z' fill='%234fd1c5'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0e1420;
+    --bg-soft:#151d2c;
+    --card:#1a2334;
+    --line:#26324a;
+    --text:#e8eef8;
+    --muted:#9aa9c2;
+    --accent:#4fd1c5;
+    --accent-2:#7c9cff;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    line-height:1.75;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block;max-width:100%}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,20,32,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;min-height:64px;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:.5px}
+  .logo svg{flex:0 0 auto}
+  .logo span{color:var(--text)}
+  .nav-links{display:flex;gap:26px;font-size:14.5px;color:var(--muted)}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover,.nav-links a:focus{color:var(--accent)}
+  .nav-cta{
+    font-size:14px;padding:8px 16px;border-radius:999px;
+    border:1px solid var(--accent);color:var(--accent);
+    transition:background .2s,color .2s;
+  }
+  .nav-cta:hover,.nav-cta:focus{background:var(--accent);color:#0e1420}
+
+  /* hero */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:72px 0 64px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(900px 420px at 78% -10%, rgba(124,156,255,.16), transparent 60%),
+      radial-gradient(700px 380px at 10% 110%, rgba(79,209,197,.13), transparent 60%);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;
+  }
+  .tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--accent);
+    border:1px solid rgba(79,209,197,.35);
+    background:rgba(79,209,197,.08);
+    padding:5px 12px;border-radius:999px;margin-bottom:20px;
+  }
+  .tag i{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+  h1{
+    font-size:clamp(28px,4.6vw,46px);
+    line-height:1.22;font-weight:800;letter-spacing:.5px;
+    margin-bottom:20px;
+  }
+  h1 .hl{
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{color:var(--muted);font-size:16.5px;max-width:34em;margin-bottom:28px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:12px 24px;border-radius:10px;font-size:15px;font-weight:600;
+    transition:transform .15s,box-shadow .2s,background .2s;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent),#3fb8cf);
+    color:#0b1220;box-shadow:0 8px 24px rgba(79,209,197,.25);
+  }
+  .btn-primary:hover,.btn-primary:focus{transform:translateY(-2px);box-shadow:0 12px 30px rgba(79,209,197,.35)}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);background:rgba(255,255,255,.02)}
+  .btn-ghost:hover,.btn-ghost:focus{border-color:var(--accent);color:var(--accent)}
+  .btn[aria-disabled="true"]{
+    background:var(--card);color:var(--muted);
+    border:1px solid var(--line);pointer-events:none;box-shadow:none;
+  }
+  .hero-note{margin-top:18px;font-size:13px;color:var(--muted)}
+
+  /* hero visual */
+  .device{
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:14px;
+    box-shadow:0 24px 60px rgba(0,0,0,.45);
+  }
+  .device-bar{display:flex;gap:6px;margin-bottom:12px}
+  .device-bar i{width:9px;height:9px;border-radius:50%;background:#33415e;display:block}
+  .screen{
+    position:relative;border-radius:10px;overflow:hidden;
+    aspect-ratio:16/10;
+    background:linear-gradient(160deg,#1d2b45,#111a29 70%);
+    border:1px solid #2b3a58;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .screen svg{width:64px;height:64px;opacity:.9}
+  .screen .scan{
+    position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 4px);
+    pointer-events:none;
+  }
+  .screen-meta{
+    position:absolute;left:12px;bottom:10px;right:12px;
+    display:flex;justify-content:space-between;font-size:11.5px;color:#8fa3c4;
+  }
+  .progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:#22304a}
+  .progress span{display:block;height:100%;width:62%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+  /* section base */
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:34px;max-width:44em}
+  .sec-head h2{font-size:clamp(21px,2.8vw,28px);font-weight:700;letter-spacing:.3px;margin-bottom:12px}
+  .sec-head p{color:var(--muted);font-size:15.5px}
+  .kicker{
+    font-size:12.5px;letter-spacing:2px;color:var(--accent);
+    text-transform:uppercase;margin-bottom:10px;font-weight:600;
+  }
+
+  /* feature cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 22px;
+    transition:border-color .2s,transform .2s;
+  }
+  .card:hover{border-color:rgba(79,209,197,.5);transform:translateY(-3px)}
+  .card .ic{
+    width:40px;height:40px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(79,209,197,.1);margin-bottom:16px;
+  }
+  .card h3{font-size:17px;font-weight:700;margin-bottom:9px}
+  .card p{font-size:14.5px;color:var(--muted);line-height:1.7}
+
+  /* flow */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .step{
+    position:relative;background:var(--bg-soft);
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 20px;
+  }
+  .step .num{
+    font-size:13px;font-weight:700;color:#0b1220;
+    width:26px;height:26px;border-radius:50%;
+    background:var(--accent);display:flex;align-items:center;justify-content:center;
+    margin-bottom:14px;
+  }
+  .step h3{font-size:15.5px;margin-bottom:8px}
+  .step p{font-size:14px;color:var(--muted)}
+
+  /* scenario list */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+  .list{list-style:none;display:grid;gap:14px}
+  .list li{
+    display:flex;gap:12px;font-size:15px;color:var(--muted);
+    background:var(--bg-soft);border:1px solid var(--line);
+    border-radius:10px;padding:14px 16px;
+  }
+  .list li b{color:var(--text);font-weight:600}
+  .list li svg{flex:0 0 auto;margin-top:4px}
+  .prose p{color:var(--muted);font-size:15.5px;margin-bottom:16px}
+  .prose p strong{color:var(--text);font-weight:600}
+
+  /* faq */
+  .faq{display:grid;gap:14px;max-width:900px}
+  details{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:18px 20px;
+  }
+  details[open]{border-color:rgba(79,209,197,.45)}
+  summary{
+    cursor:pointer;font-weight:600;font-size:15.5px;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--accent);font-size:20px;line-height:1;transition:transform .2s}
+  details[open] summary::after{content:"−"}
+  details p{margin-top:12px;color:var(--muted);font-size:14.5px}
+
+  /* download */
+  .dl{
+    display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
+    background:linear-gradient(135deg,rgba(79,209,197,.1),rgba(124,156,255,.08));
+    border:1px solid rgba(79,209,197,.28);
+    border-radius:18px;padding:34px 32px;
+  }
+  .dl h2{font-size:clamp(20px,2.6vw,26px);margin-bottom:10px}
+  .dl p{color:var(--muted);font-size:15px;max-width:36em}
+  .dl-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* footer */
+  footer{padding:44px 0 36px;background:var(--bg-soft);border-top:1px solid var(--line)}
+  .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;margin-bottom:28px}
+  .foot-brand{max-width:32em}
+  .foot-brand .logo{margin-bottom:12px}
+  .foot-brand p{color:var(--muted);font-size:14px}
+  .foot-col h4{font-size:14px;margin-bottom:12px;color:var(--text)}
+  .foot-col a{display:block;color:var(--muted);font-size:14px;margin-bottom:9px;transition:color .2s}
+  .foot-col a:hover,.foot-col a:focus{color:var(--accent)}
+  .foot-bottom{
+    border-top:1px solid var(--line);padding-top:20px;
+    font-size:13px;color:var(--muted);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:34px}
+    .cards{grid-template-columns:1fr 1fr}
+    .flow{grid-template-columns:1fr 1fr}
+    .split{grid-template-columns:1fr;gap:28px}
+    .nav-links{display:none}
+  }
+  @media (max-width:600px){
+    .hero{padding:48px 0 44px}
+    section{padding:48px 0}
+    .cards{grid-template-columns:1fr}
+    .flow{grid-template-columns:1fr}
+    .dl{grid-template-columns:1fr;padding:26px 22px}
+    .btn{padding:11px 20px;font-size:14.5px}
+    .hero-actions .btn{flex:1 1 auto;justify-content:center}
+    .foot-top{flex-direction:column}
+  }
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="看片浏览器首页">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#101826"/>
+        <circle cx="32" cy="32" r="17" fill="none" stroke="#4fd1c5" stroke-width="3"/>
+        <path d="M27 23l14 9-14 9z" fill="#4fd1c5"/>
+      </svg>
+      <span>看片浏览器</span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#features">核心功能</a>
+      <a href="#flow">使用方式</a>
+      <a href="#scenes">适用场景</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <a class="nav-cta" href="#download">获取客户端</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag"><i></i>内置播放能力的浏览工具</span>
+        <h1>看片浏览器</h1>
+        <p class="lead">看片浏览器把网页浏览与视频播放放在同一个窗口里：打开视频页面即可直接播放，无需在浏览器与播放器之间来回切换。多标签、清晰度切换与无痕模式共同构成完整的在线看片流程。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#features">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>
+            了解核心功能
+          </a>
+          <a class="btn btn-ghost" href="#flow">查看使用方式</a>
+        </div>
+        <p class="hero-note">页面内容为看片浏览器的功能说明，具体版本与能力以实际客户端为准。</p>
+      </div>
+      <div class="device" aria-hidden="true">
+        <div class="device-bar"><i></i><i></i><i></i></div>
+        <div class="screen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.5l6 3.5-6 3.5z" fill="#4fd1c5" stroke="none"/></svg>
+          <div class="scan"></div>
+          <div class="screen-meta"><span>网页视频 · 直接播放</span><span>HD</span></div>
+          <div class="progress"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">Core</div>
+        <h2>看片浏览器围绕“边浏览边播放”设计的功能</h2>
+        <p>这些能力共同服务于一个目标：让网页中的视频内容打开即播，且播放过程不打断浏览节奏。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="1.9"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M10 9l5 2.5L10 14z" fill="#4fd1c5" stroke="none"/></svg>
+          </div>
+          <h3>网页视频直接播放</h3>
+          <p>在看片浏览器中打开含视频的网页，播放器内嵌于页面，点击即可开始，不必另存链接或调用外部程序。</p>
+        </article>
+        <article class="card">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="1.9"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
+          </div>
+          <h3>多标签并行管理</h3>
+          <p>同时打开多个视频页面，在标签之间快速切换。看片浏览器按标签隔离播放状态，切换时不必重新加载。</p>
+        </article>
+        <article class="card">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21"/></svg>
+          </div>
+          <h3>清晰度与画面调节</h3>
+          <p>在播放界面内切换清晰度、调整画面比例与音量，看片浏览器将常用控制集中在同一层，减少跳转。</p>
+        </article>
+        <article class="card">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="1.9"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><path d="M4 4l16 16"/></svg>
+          </div>
+          <h3>无痕浏览模式</h3>
+          <p>开启无痕后，看片浏览器不在本地保留该会话的浏览记录，适合在共用设备上临时观看。</p>
+        </article>
+        <article class="card">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="1.9"><path d="M12 3l2.6 6.3L21 10l-5 4.2L17.5 21 12 17.4 6.5 21 8 14.2 3 10l6.4-.7z"/></svg>
+          </div>
+          <h3>收藏与继续观看</h3>
+          <p>把常看的视频页面加入收藏，看片浏览器记录播放位置，下次打开时从上次停下的地方继续。</p>
+        </article>
+        <article class="card">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="1.9"><path d="M4 17V7a2 2 0 012-2h8l6 6v6a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M14 5v6h6"/></svg>
+          </div>
+          <h3>轻量资源占用</h3>
+          <p>看片浏览器在播放时按需加载页面资源，长时间观看时内存占用保持在可控范围，老设备也能顺畅使用。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section id="flow">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">How it works</div>
+        <h2>用看片浏览器看片的四个步骤</h2>
+        <p>从打开页面到进入播放，整个路径都发生在同一个窗口内。</p>
+      </div>
+      <div class="flow">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>打开视频页面</h3>
+          <p>在看片浏览器地址栏输入网址或从收藏进入，页面加载完成后播放器随内容一起呈现。</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>点击开始播放</h3>
+          <p>点击画面中央的播放按钮，看片浏览器直接在当前标签内解码播放，无需复制链接到其他软件。</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>调节画面与控制</h3>
+          <p>按需切换清晰度、全屏或画中画。看片浏览器的控制条在鼠标离开后自动隐藏，保持画面干净。</p>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <h3>收藏并继续观看</h3>
+          <p>把页面加入收藏，下次通过看片浏览器打开时，播放进度与观看记录仍在原处等待。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENES -->
+  <section id="scenes">
+    <div class="wrap split">
+      <div>
+        <div class="kicker">Scenarios</div>
+        <h2 style="font-size:clamp(21px,2.8vw,28px);margin-bottom:22px;">看片浏览器适合哪些观看场景</h2>
+        <ul class="list">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>
+            <span><b>短时集中观看：</b>用看片浏览器打开一部影片或一集剧，播放与页面说明同屏，不必来回切换窗口。</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>
+            <span><b>多页面比对：</b>同时开几个视频标签，看片浏览器的多标签让内容切换更直接。</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>
+            <span><b>共用设备临时观看：</b>开启无痕模式后使用看片浏览器，结束后不留本地记录。</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg>
+            <span><b>连续性追看：</b>收藏片单后，看片浏览器记住进度，适合分多次看完一部作品。</span>
+          </li>
+        </ul>
+      </div>
+      <div class="prose">
+        <div class="kicker">Notes</div>
+        <h2 style="font-size:clamp(21px,2.8vw,28px);margin-bottom:22px;">使用前需要了解的几点</h2>
+        <p><strong>播放依赖页面本身。</strong>看片浏览器提供的是播放环境与控件，视频能否播放取决于所打开网页是否提供可用视频源。</p>
+        <p><strong>网络质量影响体验。</strong>清晰度切换与缓冲速度受带宽和线路影响，看片浏览器会在网络波动时优先保证播放连续性。</p>
+        <p><strong>隐私设置可调整。</strong>无痕模式只影响本地记录，不改变网络访问方式，用户可随时在看片浏览器的设置中切换。</p>
+        <p><strong>内容合规自行把握。</strong>请通过正规来源访问视频内容，看片浏览器不提供片源，也不对第三方页面内容负责。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">FAQ</div>
+        <h2>关于看片浏览器的常见问题</h2>
+        <p>以下回答基于看片浏览器当前公开的功能说明，具体表现以实际版本为准。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>看片浏览器和普通浏览器有什么区别？</summary>
+          <p>看片浏览器在常规浏览能力之上，强化了视频播放相关的控制，例如播放器内嵌、清晰度切换、播放进度记录与无痕观看。普通浏览器也能播放网页视频，但看片浏览器把这些操作集中在一个更连贯的界面里。</p>
+        </details>
+        <details>
+          <summary>看片浏览器需要单独安装播放器吗？</summary>
+          <p>不需要。看片浏览器内置播放能力，打开含视频的网页即可直接播放，不必另外安装或调用外部播放器。</p>
+        </details>
+        <details>
+          <summary>使用看片浏览器会留下观看记录吗？</summary>
+          <p>普通模式下，看片浏览器会保存浏览与播放记录，用于继续观看与收藏功能；开启无痕模式后，该会话的本地记录不会被保留。</p>
+        </details>
+        <details>
+          <summary>看片浏览器支持哪些设备？</summary>
+          <p>看片浏览器提供桌面端与移动端版本，界面会随屏幕尺寸调整。具体支持的平台与系统版本，请以客户端下载页面标注的信息为准。</p>
+        </details>
+        <details>
+          <summary>看片浏览器会提供影片资源吗？</summary>
+          <p>不会。看片浏览器是浏览与播放工具，不内置片源，也不托管视频内容。观看内容来自用户自行访问的网站。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section id="download" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="dl">
+        <div>
+          <h2>获取看片浏览器客户端</h2>
+          <p>下载后即可体验网页视频直接播放、多标签管理与无痕观看。版本号、安装包大小与支持平台将在下载入口正式开放时一并标注。</p>
+        </div>
+        <div class="dl-actions">
+          <a class="btn btn-primary" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1" style="pointer-events:none;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
+            下载
+          </a>
+          <a class="btn btn-ghost" href="#faq">先看常见问题</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo" href="#top">
+          <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#101826"/>
+            <circle cx="32" cy="32" r="17" fill="none" stroke="#4fd1c5" stroke-width="3"/>
+            <path d="M27 23l14 9-14 9z" fill="#4fd1c5"/>
+          </svg>
+          <span>看片浏览器</span>
+        </a>
+        <p>看片浏览器是一款面向网页视频观看场景的浏览工具，把浏览、播放与进度记录放在同一窗口，减少观看过程中的跳转与切换。</p>
+      </div>
+      <div class="foot-col">
+        <h4>页面导航</h4>
+        <a href="#features">核心功能</a>
+        <a href="#flow">使用方式</a>
+        <a href="#scenes">适用场景</a>
+        <a href="#faq">常见问题</a>
+      </div>
+      <div class="foot-col">
+        <h4>了解产品</h4>
+        <a href="#features">网页视频播放</a>
+        <a href="#scenes">无痕观看说明</a>
+        <a href="#download">客户端获取</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>看片浏览器 · 功能说明页</span>
+      <span>页面信息仅作产品介绍，实际功能以客户端为准</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
