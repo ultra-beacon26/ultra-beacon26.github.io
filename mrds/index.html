@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mrds.fun-网络资源导航_热门入口与站点聚合</title>
+<meta name="description" content="mrds.fun 是一个网络资源导航入口页，汇总热门站点分类、常用工具与访问路径，帮助访客快速找到需要的资源入口，并提供清晰的使用说明与常见问题解答。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f172a'/%3E%3Ccircle cx='38' cy='42' r='13' fill='%2338bdf8'/%3E%3Ccircle cx='64' cy='58' r='9' fill='%23f472b6'/%3E%3Cpath d='M20 78 L46 52 L62 68 L82 40' stroke='%23facc15' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0b1120;
+  --bg-soft:#111a2e;
+  --card:#16213a;
+  --line:#243354;
+  --text:#e6edf9;
+  --muted:#9aa9c4;
+  --accent:#38bdf8;
+  --accent2:#f472b6;
+  --warm:#facc15;
+  --radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;}
+.wrap{width:min(1120px,92vw);margin:0 auto;}
+
+/* header */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(11,17,32,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:.3px;}
+.brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#1e3a8a,#0f172a);display:grid;place-items:center;border:1px solid var(--line);}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;}
+.nav-links a{
+  font-size:14px;color:var(--muted);padding:8px 12px;border-radius:10px;transition:.2s;
+}
+.nav-links a:hover{color:var(--text);background:var(--bg-soft);}
+.nav-cta{
+  font-size:14px;padding:9px 16px;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),#2563eb);color:#04121f;font-weight:700;
+  white-space:nowrap;
+}
+
+/* hero */
+.hero{padding:64px 0 48px;position:relative;overflow:hidden;}
+.hero::before{
+  content:"";position:absolute;inset:-30% -10% auto -10%;height:520px;
+  background:radial-gradient(closest-side,rgba(56,189,248,.18),transparent 70%),
+             radial-gradient(closest-side at 80% 20%,rgba(244,114,182,.14),transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;position:relative;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--accent);
+  border:1px solid rgba(56,189,248,.35);background:rgba(56,189,248,.08);
+  padding:5px 12px;border-radius:999px;margin-bottom:18px;
+}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(56,189,248,.18);}
+h1{font-size:clamp(34px,5.2vw,54px);line-height:1.15;letter-spacing:-1px;font-weight:800;}
+h1 .hl{background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p.lead{margin-top:18px;color:var(--muted);font-size:16.5px;max-width:560px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;
+  font-size:15px;font-weight:700;transition:.2s;border:1px solid transparent;
+}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#2563eb);color:#04121f;}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(56,189,248,.28);}
+.btn-ghost{border-color:var(--line);color:var(--text);background:var(--bg-soft);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed;pointer-events:none;}
+
+.hero-art{
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:22px;
+  padding:22px;position:relative;
+}
+.hero-art .tag{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.art-list{margin-top:14px;display:grid;gap:10px;}
+.art-item{
+  display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:12px;
+  background:var(--card);border:1px solid var(--line);font-size:14px;
+}
+.art-item .ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;font-size:13px;font-weight:800;}
+.art-item .meta{display:flex;flex-direction:column;line-height:1.35;}
+.art-item .meta small{color:var(--muted);font-size:12px;}
+.art-item .bar{margin-left:auto;width:52px;height:6px;border-radius:99px;background:#1e2b47;overflow:hidden;}
+.art-item .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+
+/* section base */
+section{padding:56px 0;}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px;flex-wrap:wrap;}
+.sec-head h2{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-.4px;}
+.sec-head p{color:var(--muted);font-size:14.5px;max-width:520px;margin-top:6px;}
+
+/* category cards */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;transition:.22s;
+}
+.card:hover{border-color:rgba(56,189,248,.55);transform:translateY(-3px);}
+.card .icon{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;margin-bottom:14px;
+  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);
+}
+.card h3{font-size:16.5px;font-weight:700;margin-bottom:6px;}
+.card p{font-size:14px;color:var(--muted);}
+.card .links{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;}
+.card .links a{
+  font-size:12.5px;color:var(--accent);background:rgba(56,189,248,.08);
+  border:1px solid rgba(56,189,248,.2);padding:4px 10px;border-radius:999px;
+}
+.card .links a:hover{background:rgba(56,189,248,.2);}
+
+/* feature / explain */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch;}
+.panel{
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+}
+.panel h3{font-size:18px;margin-bottom:14px;display:flex;align-items:center;gap:9px;}
+.panel h3 .badge{font-size:11px;font-weight:700;color:#04121f;background:var(--warm);padding:2px 8px;border-radius:6px;}
+.steps{list-style:none;display:grid;gap:14px;counter-reset:s;}
+.steps li{
+  position:relative;padding-left:42px;font-size:14.5px;color:var(--muted);counter-increment:s;
+}
+.steps li::before{
+  content:counter(s);position:absolute;left:0;top:1px;width:27px;height:27px;border-radius:8px;
+  display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--accent);
+  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.28);
+}
+.steps li b{color:var(--text);font-weight:700;}
+.note-list{list-style:none;display:grid;gap:12px;font-size:14.5px;color:var(--muted);}
+.note-list li{display:flex;gap:10px;align-items:flex-start;}
+.note-list li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent2);margin-top:9px;flex:0 0 auto;}
+
+/* table list */
+.list-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+.list-row{
+  display:grid;grid-template-columns:44px 1.4fr 1fr 110px;gap:14px;align-items:center;
+  padding:16px 20px;border-bottom:1px solid var(--line);font-size:14px;
+}
+.list-row:last-child{border-bottom:none;}
+.list-row .num{color:var(--muted);font-weight:700;font-size:13px;}
+.list-row .name{font-weight:700;}
+.list-row .name small{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:2px;}
+.list-row .cat{color:var(--muted);font-size:13px;}
+.list-row a.enter{
+  justify-self:end;font-size:13px;color:var(--accent);border:1px solid rgba(56,189,248,.3);
+  padding:6px 14px;border-radius:9px;background:rgba(56,189,248,.07);white-space:nowrap;
+}
+.list-row a.enter:hover{background:rgba(56,189,248,.18);}
+
+/* faq */
+.faq{display:grid;gap:12px;}
+details{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;
+}
+details[open]{border-color:rgba(56,189,248,.4);}
+summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px;}
+summary::-webkit-details-marker{display:none;}
+summary::after{content:"+";color:var(--accent);font-weight:800;}
+details[open] summary::after{content:"–";}
+details p{margin-top:10px;color:var(--muted);font-size:14px;}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:36px 0 44px;background:var(--bg-soft);}
+.foot-top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start;}
+.foot-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:var(--muted);}
+.foot-links a:hover{color:var(--accent);}
+.foot-bottom{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:32px;}
+  .grid-3{grid-template-columns:1fr 1fr;}
+  .split{grid-template-columns:1fr;}
+  .list-row{grid-template-columns:34px 1.4fr 90px;}
+  .list-row .cat{display:none;}
+}
+@media (max-width:640px){
+  .nav-cta{display:none;}
+  .nav-links{gap:2px;}
+  .nav-links a{padding:7px 9px;font-size:13px;}
+  .grid-3{grid-template-columns:1fr;}
+  .hero{padding:44px 0 36px;}
+  section{padding:42px 0;}
+  .list-row{grid-template-columns:28px 1fr;gap:10px;padding:14px 16px;}
+  .list-row a.enter{grid-column:2;justify-self:start;margin-top:6px;}
+  .list-row .cat{display:none;}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="mrds.fun 首页">
+      <span class="mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 100 100" role="img">
+          <circle cx="36" cy="40" r="13" fill="#38bdf8"/>
+          <circle cx="64" cy="58" r="9" fill="#f472b6"/>
+          <path d="M18 80 L46 50 L62 66 L84 38" stroke="#facc15" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      mrds.fun
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#categories">资源分类</a>
+      <a href="#howto">使用方式</a>
+      <a href="#hotlist">热门入口</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <a class="nav-cta" href="#hotlist">开始浏览</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>资源导航 · 入口聚合</span>
+        <h1>mrds.fun</h1>
+        <p class="lead">mrds.fun 是一个面向日常上网的资源导航入口，把分散的热门站点、常用工具与实用服务按类别收纳在一页之内，减少反复搜索的时间，让访问者更快找到想去的方向。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#categories">浏览资源分类
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#howto">了解使用方式</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="tag">今日导航概览</div>
+        <div class="art-list">
+          <div class="art-item">
+            <span class="ico" style="background:rgba(56,189,248,.16);color:#38bdf8;">热</span>
+            <span class="meta">热门站点<small>按访问频次排列</small></span>
+            <span class="bar"><i style="width:86%"></i></span>
+          </div>
+          <div class="art-item">
+            <span class="ico" style="background:rgba(244,114,182,.16);color:#f472b6;">工</span>
+            <span class="meta">实用工具<small>查询与转换类</small></span>
+            <span class="bar"><i style="width:68%"></i></span>
+          </div>
+          <div class="art-item">
+            <span class="ico" style="background:rgba(250,204,21,.16);color:#facc15;">资</span>
+            <span class="meta">资源聚合<small>分类清晰可查</small></span>
+            <span class="bar"><i style="width:74%"></i></span>
+          </div>
+          <div class="art-item">
+            <span class="ico" style="background:rgba(52,211,153,.16);color:#34d399;">学</span>
+            <span class="meta">学习阅读<small>内容型站点</small></span>
+            <span class="bar"><i style="width:59%"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>资源分类</h2>
+          <p>mrds.fun 把常见上网需求拆成几个明确方向，每个方向下再列出对应的入口，方便按目的查找，而不是盲目翻找。</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>热门站点</h3>
+          <p>覆盖资讯、社区与内容平台等高频访问方向，适合想快速了解当下热门去处的人。</p>
+          <div class="links"><a href="#hotlist">查看入口</a><a href="#faq">访问说明</a></div>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v4M12 17v4M3 12h4M17 12h4" stroke="#f472b6" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="#f472b6" stroke-width="2"/></svg>
+          </div>
+          <h3>实用工具</h3>
+          <p>查询、转换、文本处理一类的小工具入口，日常够用，打开即用，无需额外安装。</p>
+          <div class="links"><a href="#howto">使用步骤</a><a href="#hotlist">工具入口</a></div>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="#facc15" stroke-width="2"/><path d="M7 9h10M7 13h6" stroke="#facc15" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>学习阅读</h3>
+          <p>文档、教程与长文阅读类站点，适合需要沉淀内容、查找资料的使用场景。</p>
+          <div class="links"><a href="#hotlist">阅读入口</a><a href="#faq">常见问题</a></div>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 17l5-6 4 4 3-4 4 5" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="7" r="2.4" stroke="#34d399" stroke-width="2"/></svg>
+          </div>
+          <h3>数据查询</h3>
+          <p>面向需要快速比对数据的访问者，提供查询类入口与结果查看的常规路径。</p>
+          <div class="links"><a href="#hotlist">查询入口</a><a href="#howto">操作说明</a></div>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#a78bfa" stroke-width="2"/><path d="M12 8v4l3 2" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>效率服务</h3>
+          <p>帮助节省时间的辅助类服务入口，适合把重复操作交给页面工具完成。</p>
+          <div class="links"><a href="#hotlist">服务入口</a><a href="#faq">访问说明</a></div>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.6 5.6L21 9.6l-4.5 4.3 1.1 6.1L12 17.2 6.4 20l1.1-6.1L3 9.6l6.4-1z" stroke="#fbbf24" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>收藏与常用</h3>
+          <p>把常去的入口放在显眼位置，mrds.fun 的导航结构也方便长期使用与快速回访。</p>
+          <div class="links"><a href="#hotlist">常用入口</a><a href="#howto">查看方式</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOWTO + NOTES -->
+  <section id="howto">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>使用方式</h2>
+          <p>不需要注册，也不需要额外配置。打开 mrds.fun 之后，按下面的顺序操作即可完成一次完整访问。</p>
+        </div>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3><span class="badge">3 步</span>从进入页面到找到入口</h3>
+          <ol class="steps">
+            <li><b>先看分类。</b>在“资源分类”里找到最接近你当前目的的那一类，比如查资料、找工具或看内容。</li>
+            <li><b>再看列表。</b>展开对应分类后，按名称和说明判断哪个入口更符合需要，避免逐个尝试。</li>
+            <li><b>最后核对。</b>进入第三方站点前，确认地址栏与页面名称一致，再继续使用其功能。</li>
+          </ol>
+        </div>
+        <div class="panel">
+          <h3>访问提醒</h3>
+          <ul class="note-list">
+            <li>mrds.fun 只提供导航与入口聚合，不托管第三方站点的具体内容，页面功能以对应站点为准。</li>
+            <li>多数入口无需登录即可浏览，是否注册、是否收费由目标站点自行决定，导航页不作承诺。</li>
+            <li>若某个入口暂时无法打开，通常是目标站点自身的原因，可稍后重试或换用同类入口。</li>
+            <li>建议使用较新的浏览器版本访问，以保证页面布局与跳转链接的正常显示。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOT LIST -->
+  <section id="hotlist">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>热门入口</h2>
+          <p>下表按分类列出常用方向，名称与说明用于帮助判断用途；实际可用性以对应站点为准。</p>
+        </div>
+      </div>
+      <div class="list-box">
+        <div class="list-row">
+          <span class="num">01</span>
+          <span class="name">综合资讯入口<small>资讯浏览与内容聚合方向</small></span>
+          <span class="cat">热门站点</span>
+          <a class="enter" href="#hotlist">前往</a>
+        </div>
+        <div class="list-row">
+          <span class="num">02</span>
+          <span class="name">工具集合入口<small>查询、转换与文本处理</small></span>
+          <span class="cat">实用工具</span>
+          <a class="enter" href="#hotlist">前往</a>
+        </div>
+        <div class="list-row">
+          <span class="num">03</span>
+          <span class="name">文档阅读入口<small>长文与资料阅读场景</small></span>
+          <span class="cat">学习阅读</span>
+          <a class="enter" href="#hotlist">前往</a>
+        </div>
+        <div class="list-row">
+          <span class="num">04</span>
+          <span class="name">数据查询入口<small>快速比对与结果查看</small></span>
+          <span class="cat">数据查询</span>
+          <a class="enter" href="#hotlist">前往</a>
+        </div>
+        <div class="list-row">
+          <span class="num">05</span>
+          <span class="name">效率服务入口<small>辅助类操作与流程简化</small></span>
+          <span class="cat">效率服务</span>
+          <a class="enter" href="#hotlist">前往</a>
+        </div>
+        <div class="list-row">
+          <span class="num">06</span>
+          <span class="name">常用收藏入口<small>高频回访的固定位置</small></span>
+          <span class="cat">收藏与常用</span>
+          <a class="enter" href="#hotlist">前往</a>
+        </div>
+      </div>
+      <div class="hero-actions" style="margin-top:24px;">
+        <a class="btn btn-ghost" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>常见问题</h2>
+          <p>关于 mrds.fun 的定位与使用边界，集中回答访问者最常提出的几个疑问。</p>
+        </div>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>mrds.fun 是什么类型的站点？</summary>
+          <p>它是一个资源导航页，主要工作是按分类整理入口地址，让访问者少走弯路。页面本身不生产内容，也不代表所链接站点的观点。</p>
+        </details>
+        <details>
+          <summary>使用 mrds.fun 需要付费或注册吗？</summary>
+          <p>浏览导航页本身不涉及账号与费用。进入第三方站点后是否需要注册、登录或付费，取决于该站点的规则，建议在操作前先阅读其页面说明。</p>
+        </details>
+        <details>
+          <summary>为什么有的入口打不开？</summary>
+          <p>导航页只负责指路，目标站点可能因维护、调整或网络原因暂时不可用。遇到这种情况可以稍后重试，或在本页选择同一分类下的其他入口。</p>
+        </details>
+        <details>
+          <summary>在手机上使用体验如何？</summary>
+          <p>页面采用响应式布局，手机端会优先显示主题文字与分类内容，导航、卡片和列表会按小屏重新排列，方便单手浏览与点击。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <svg width="18" height="18" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="36" cy="40" r="13" fill="#38bdf8"/>
+            <circle cx="64" cy="58" r="9" fill="#f472b6"/>
+            <path d="M18 80 L46 50 L62 66 L84 38" stroke="#facc15" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          mrds.fun
+        </div>
+        <p style="color:var(--muted);font-size:13.5px;margin-top:10px;max-width:420px;">mrds.fun 汇集常用资源入口，按类别整理，帮助访问者更快找到需要的方向。</p>
+      </div>
+      <nav class="foot-links" aria-label="页尾导航">
+        <a href="#categories">资源分类</a>
+        <a href="#howto">使用方式</a>
+        <a href="#hotlist">热门入口</a>
+        <a href="#faq">常见问题</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>mrds.fun · 资源导航入口页</span>
+      <span>页面内容以导航说明为主，第三方站点功能以其自身页面为准。</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
