@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>茄子短视频官方网站-茄子短视频下载_茄子短视频安卓版安装_官方正版客户端</title>
+<meta name="description" content="茄子短视频官方网站首页，介绍茄子短视频的观看方式、内容频道、客户端下载与常见问题，提供安卓版与电脑版安装入口，帮助用户快速找到官方正版客户端与使用说明。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232f7d4f'/%3E%3Cpath d='M26 20v24l20-12z' fill='%23f6f3e7'/%3E%3C/svg%3E">
+<style>
+:root{
+  --green:#2f7d4f;
+  --green-deep:#1f5a37;
+  --green-soft:#e6f0e8;
+  --cream:#faf8f1;
+  --ink:#1d2420;
+  --ink-soft:#4f5a53;
+  --line:#dfe5dd;
+  --amber:#e0a63c;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",system-ui,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;max-width:100%;}
+.wrap{width:min(1140px,92vw);margin:0 auto;}
+
+/* 页头 */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,248,241,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:12px 0;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:var(--green-deep);letter-spacing:.2px;}
+.brand .mark{
+  width:38px;height:38px;border-radius:11px;background:var(--green);
+  display:grid;place-items:center;flex:0 0 auto;
+}
+.brand .mark svg{width:20px;height:20px;}
+nav.main ul{display:flex;gap:22px;list-style:none;font-size:15px;color:var(--ink-soft);}
+nav.main a:hover{color:var(--green-deep);}
+.nav-cta{
+  background:var(--green);color:#fff;padding:9px 18px;border-radius:999px;
+  font-size:14px;font-weight:600;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--green-deep);}
+@media(max-width:820px){
+  nav.main{display:none;}
+  .nav-inner{padding:10px 0;}
+  .brand{font-size:15px;}
+}
+
+/* 首屏 */
+.hero{
+  padding:52px 0 46px;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(224,166,60,.16), transparent 42%),
+    radial-gradient(circle at 6% 92%, rgba(47,125,79,.12), transparent 46%);
+  border-bottom:1px solid var(--line);
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:46px;align-items:center;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--green-deep);background:var(--green-soft);
+  padding:5px 12px;border-radius:999px;margin-bottom:16px;
+}
+h1{
+  font-size:clamp(26px,3.6vw,40px);
+  line-height:1.28;letter-spacing:.4px;color:var(--green-deep);
+  font-weight:800;
+}
+.hero p.lead{margin-top:16px;font-size:16px;color:var(--ink-soft);max-width:34em;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:999px;font-weight:600;font-size:15px;
+  border:1px solid transparent;transition:transform .15s ease,background .15s ease;
+}
+.btn-primary{background:var(--green);color:#fff;}
+.btn-primary:hover{background:var(--green-deep);transform:translateY(-1px);}
+.btn-ghost{border-color:var(--green);color:var(--green-deep);}
+.btn-ghost:hover{background:var(--green-soft);}
+.btn[aria-disabled="true"]{cursor:default;}
+.hero-note{margin-top:16px;font-size:13px;color:#7a847d;}
+
+.hero-art{
+  background:#fff;border:1px solid var(--line);border-radius:22px;
+  padding:18px;box-shadow:0 18px 40px -28px rgba(31,90,55,.5);
+}
+.hero-art .art-cap{font-size:12.5px;color:#7a847d;margin-top:10px;text-align:center;}
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:28px;}
+  .hero{padding:34px 0 32px;}
+  .hero p.lead{font-size:15px;}
+}
+
+/* 通用区块 */
+section{padding:56px 0;}
+section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.sec-head{max-width:44em;margin-bottom:30px;}
+.sec-head h2{
+  font-size:clamp(21px,2.4vw,27px);color:var(--green-deep);font-weight:800;letter-spacing:.3px;
+}
+.sec-head p{margin-top:10px;color:var(--ink-soft);font-size:15px;}
+
+/* 频道卡片 */
+.channels{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.channel{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px 18px;display:flex;flex-direction:column;gap:8px;
+}
+.channel .ic{
+  width:38px;height:38px;border-radius:10px;background:var(--green-soft);
+  display:grid;place-items:center;color:var(--green-deep);
+}
+.channel h3{font-size:16px;font-weight:700;}
+.channel p{font-size:13.5px;color:var(--ink-soft);line-height:1.65;}
+@media(max-width:900px){.channels{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.channels{grid-template-columns:1fr;}}
+
+/* 下载区 */
+.dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.dl-card{
+  background:var(--cream);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px 22px;display:flex;flex-direction:column;gap:12px;
+}
+.dl-card h3{font-size:17px;color:var(--green-deep);display:flex;align-items:center;gap:9px;}
+.dl-card .meta{font-size:13px;color:#7a847d;}
+.dl-card p{font-size:14.5px;color:var(--ink-soft);}
+.dl-card .btn{align-self:flex-start;margin-top:4px;}
+.dl-card .btn[aria-disabled="true"]{pointer-events:none;}
+@media(max-width:760px){.dl-grid{grid-template-columns:1fr;}}
+
+/* 观看流程 */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:step;}
+.step{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 20px;position:relative;
+}
+.step::before{
+  counter-increment:step;content:counter(step,decimal-leading-zero);
+  font-size:13px;font-weight:700;color:var(--green);
+  background:var(--green-soft);border-radius:8px;padding:2px 9px;display:inline-block;margin-bottom:12px;
+}
+.step h3{font-size:16px;margin-bottom:6px;}
+.step p{font-size:14px;color:var(--ink-soft);}
+@media(max-width:820px){.steps{grid-template-columns:1fr;}}
+
+/* 文章/说明 */
+.article-grid{display:grid;grid-template-columns:1.6fr .9fr;gap:36px;align-items:start;}
+.article-grid h2{font-size:22px;color:var(--green-deep);margin-bottom:14px;}
+.article-grid h3{font-size:16.5px;margin:22px 0 8px;color:var(--green-deep);}
+.article-grid p{font-size:15px;color:var(--ink-soft);margin-bottom:10px;}
+.aside{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;
+}
+.aside h3{font-size:15px;color:var(--green-deep);margin-bottom:12px;}
+.aside ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--ink-soft);}
+.aside li{display:flex;gap:9px;align-items:flex-start;}
+.aside li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber);margin-top:8px;flex:0 0 auto;}
+@media(max-width:860px){.article-grid{grid-template-columns:1fr;gap:24px;}}
+
+/* 问答 */
+.faq{display:flex;flex-direction:column;gap:12px;}
+details{
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+}
+details[open]{border-color:#c6d9cb;}
+summary{
+  cursor:pointer;font-weight:600;font-size:15.5px;color:var(--green-deep);
+  list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;
+}
+summary::-webkit-details-marker{display:none;}
+summary::after{content:"+";font-size:19px;color:var(--green);font-weight:400;}
+details[open] summary::after{content:"−";}
+details p{margin-top:10px;font-size:14.5px;color:var(--ink-soft);}
+
+/* 页尾 */
+footer.site{
+  background:var(--green-deep);color:#e8f0e9;padding:44px 0 26px;margin-top:10px;
+}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;}
+footer.site h4{font-size:15px;margin-bottom:12px;color:#fff;}
+footer.site p{font-size:13.5px;color:#c3d5c7;line-height:1.8;}
+footer.site ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:#c3d5c7;}
+footer.site a:hover{color:#fff;text-decoration:underline;}
+.foot-bottom{
+  margin-top:30px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);
+  font-size:12.5px;color:#a9c1ae;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:22px;}}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6v12l10-6z" fill="#f6f3e7"/></svg>
+      </span>
+      茄子短视频官方网站
+    </a>
+    <nav class="main" aria-label="主导航">
+      <ul>
+        <li><a href="#channels">内容频道</a></li>
+        <li><a href="#download">客户端下载</a></li>
+        <li><a href="#howto">观看方法</a></li>
+        <li><a href="#about">平台说明</a></li>
+        <li><a href="#faq">常见问题</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#download">获取客户端</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#1f5a37" stroke-width="2"/><path d="M10 8.5v7l6-3.5z" fill="#1f5a37"/></svg>
+          官方正版客户端入口
+        </span>
+        <h1>茄子短视频官方网站</h1>
+        <p class="lead">这里是茄子短视频官方网站的首页，集中说明平台的内容频道、客户端获取方式与日常使用方法。想了解茄子短视频怎么看、在哪些设备上用、下载哪一个版本，都可以从本页找到对应入口与说明。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#download">
+            下载客户端
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#channels">浏览内容频道</a>
+        </div>
+        <p class="hero-note">下载入口按安卓版与电脑版分别提供，安装前请对照设备型号与系统版本。</p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 300" role="img" aria-label="短视频播放界面示意图">
+          <rect x="0" y="0" width="420" height="300" rx="16" fill="#faf8f1"/>
+          <rect x="24" y="24" width="230" height="252" rx="14" fill="#1f5a37"/>
+          <path d="M118 118v64l56-32z" fill="#f6f3e7" opacity=".92"/>
+          <rect x="40" y="228" width="120" height="9" rx="4.5" fill="#7fae8f"/>
+          <rect x="40" y="246" width="76" height="9" rx="4.5" fill="#4d8461"/>
+          <rect x="272" y="24" width="124" height="72" rx="12" fill="#e6f0e8"/>
+          <rect x="286" y="42" width="72" height="8" rx="4" fill="#2f7d4f"/>
+          <rect x="286" y="60" width="94" height="8" rx="4" fill="#a9c9b4"/>
+          <rect x="272" y="110" width="124" height="72" rx="12" fill="#f3e8cd"/>
+          <rect x="286" y="128" width="60" height="8" rx="4" fill="#e0a63c"/>
+          <rect x="286" y="146" width="94" height="8" rx="4" fill="#d8c08a"/>
+          <rect x="272" y="196" width="124" height="80" rx="12" fill="#e6f0e8"/>
+          <circle cx="298" cy="222" r="10" fill="#2f7d4f"/>
+          <rect x="316" y="216" width="62" height="8" rx="4" fill="#2f7d4f"/>
+          <rect x="286" y="242" width="94" height="8" rx="4" fill="#a9c9b4"/>
+        </svg>
+        <p class="art-cap">界面仅为结构示意，实际以客户端为准</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 内容频道 -->
+  <section id="channels">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>茄子短视频的内容频道</h2>
+        <p>茄子短视频官方网站将内容按主题划分为若干频道，方便按兴趣直接进入对应分类。以下频道名称与说明用于帮助新访客判断从哪里开始浏览。</p>
+      </div>
+      <div class="channels">
+        <article class="channel">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#1f5a37" stroke-width="2"/><path d="M10 9.5v5l4.5-2.5z" fill="#1f5a37"/></svg></span>
+          <h3>推荐流</h3>
+          <p>打开客户端后的默认页面，按时间与热度混合展示短视频，适合没有明确目标时随意浏览。</p>
+        </article>
+        <article class="channel">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V6a2 2 0 012-2h9l5 5v10a2 2 0 01-2 2H6a2 2 0 01-2-2z" stroke="#1f5a37" stroke-width="2"/><path d="M8 12h8M8 16h5" stroke="#1f5a37" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <h3>生活记录</h3>
+          <p>日常片段、手艺过程与城市见闻类内容，单条时长较短，适合碎片时间观看。</p>
+        </article>
+        <article class="channel">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z" stroke="#1f5a37" stroke-width="2" stroke-linejoin="round"/></svg></span>
+          <h3>才艺展示</h3>
+          <p>音乐、舞蹈、绘画与手工等创作向内容，可按标签继续筛选同类型作品。</p>
+        </article>
+        <article class="channel">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#1f5a37" stroke-width="2"/><path d="M12 7v5l3.5 2" stroke="#1f5a37" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <h3>知识短片</h3>
+          <p>用几十秒讲清一个小知识点或操作步骤，适合带着具体问题检索后观看。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 下载 -->
+  <section id="download" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>客户端下载入口</h2>
+        <p>茄子短视频官方网站按设备类型分别提供安装包入口。下载前请确认系统版本，安装过程中如遇拦截提示，可先核对来源与文件名称。</p>
+      </div>
+      <div class="dl-grid">
+        <article class="dl-card">
+          <h3>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5" stroke="#1f5a37" stroke-width="2"/><path d="M10.5 18.5h3" stroke="#1f5a37" stroke-width="2" stroke-linecap="round"/></svg>
+            安卓版客户端
+          </h3>
+          <span class="meta">适用 Android 手机与平板</span>
+          <p>安装包体积较小，安装后可直接登录并浏览推荐流，适合以手机为主要观看设备的用户。</p>
+          <a class="btn btn-primary" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+        </article>
+        <article class="dl-card">
+          <h3>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12" rx="2" stroke="#1f5a37" stroke-width="2"/><path d="M8 20h8M12 16v4" stroke="#1f5a37" stroke-width="2" stroke-linecap="round"/></svg>
+            电脑版客户端
+          </h3>
+          <span class="meta">适用 Windows 桌面系统</span>
+          <p>大屏窗口观看与列表检索更顺手，适合需要较长观看时间或边看边做记录的场景。</p>
+          <a class="btn btn-primary" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 观看方法 -->
+  <section id="howto">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>从打开到开始观看的三步</h2>
+        <p>第一次使用茄子短视频时，按顺序完成下面三步即可进入正常浏览状态，后续只需打开客户端即可继续。</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <h3>获取安装包</h3>
+          <p>在本页下载区选择与设备匹配的版本，保存安装包后按系统提示完成安装。</p>
+        </article>
+        <article class="step">
+          <h3>登录并设置兴趣</h3>
+          <p>首次打开可选择登录方式，并在引导页勾选感兴趣的内容频道，推荐流会据此调整。</p>
+        </article>
+        <article class="step">
+          <h3>浏览与收藏</h3>
+          <p>上下滑动切换视频，遇到想回看的内容可加入收藏，之后在个人页统一查看。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 平台说明 -->
+  <section id="about" class="alt">
+    <div class="wrap article-grid">
+      <div>
+        <h2>茄子短视频官方网站的定位与使用说明</h2>
+        <p>茄子短视频官方网站承担的是信息说明与入口汇聚的角色：访客在这里了解平台提供什么内容、客户端有哪些版本、遇到问题该去哪里查找答案，而不是在网页端直接播放全部视频。</p>
+
+        <h3>内容以短视频为主</h3>
+        <p>平台内容以竖屏短视频为主，单条时长偏短，按频道与标签组织。推荐流会结合浏览记录调整顺序，因此不同账号看到的首页内容并不完全相同。</p>
+
+        <h3>客户端为主要观看方式</h3>
+        <p>完整功能在客户端中提供，包括播放、收藏、关注与个人设置。网页端主要保留下载入口与说明文字，便于新访客在安装前先了解基本情况。</p>
+
+        <h3>版本与更新</h3>
+        <p>各版本安装包会随功能调整而更新，下载页展示的入口对应官方渠道。如在其他来源看到名称相近的文件，建议先回到茄子短视频官方网站核对，再决定是否安装。</p>
+
+        <h3>使用中的注意事项</h3>
+        <p>观看时注意音量与连续使用时长；在公共网络环境下登录账号，建议开启设备锁屏密码。涉及个人信息填写时，只在本平台客户端内操作，不向第三方页面提交。</p>
+      </div>
+      <aside class="aside">
+        <h3>快速要点</h3>
+        <ul>
+          <li>下载入口按安卓与电脑分开提供</li>
+          <li>推荐流随浏览记录变化</li>
+          <li>收藏内容在个人页集中查看</li>
+          <li>安装前核对文件名称与来源</li>
+          <li>网页端以说明与入口为主</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 问答 -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>常见问题</h2>
+        <p>以下是访客在茄子短视频官方网站上较常提出的问题，回答仅覆盖页面能够说明的范围。</p>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>网页上能直接看视频吗？</summary>
+          <p>本页是茄子短视频官方网站的说明与入口页，完整播放功能在客户端中提供。浏览与收藏请安装对应版本后使用。</p>
+        </details>
+        <details>
+          <summary>安卓版和电脑版内容一样吗？</summary>
+          <p>两个版本面向不同设备，内容频道与基本浏览方式一致，界面布局与操作方式会按屏幕尺寸做适配。</p>
+        </details>
+        <details>
+          <summary>下载后无法安装怎么办？</summary>
+          <p>先确认系统版本是否满足要求，再检查安装包是否完整。部分设备需要在设置中允许来自当前来源的应用安装。</p>
+        </details>
+        <details>
+          <summary>收藏的内容会同步吗？</summary>
+          <p>使用同一账号登录时，收藏与关注信息随账号保存，换设备后登录即可查看。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>茄子短视频官方网站</h4>
+        <p>提供内容频道说明、客户端下载入口与常见问题解答，帮助访客在安装前了解平台的基本情况与使用方式。</p>
+      </div>
+      <div>
+        <h4>页面导航</h4>
+        <ul>
+          <li><a href="#channels">内容频道</a></li>
+          <li><a href="#download">客户端下载</a></li>
+          <li><a href="#howto">观看方法</a></li>
+          <li><a href="#faq">常见问题</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>使用提示</h4>
+        <ul>
+          <li>按设备类型选择安装包</li>
+          <li>安装前核对文件来源</li>
+          <li>注意连续观看时长</li>
+          <li>账号信息仅在客户端内填写</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>茄子短视频官方网站 · 页面内容以实际客户端为准</span>
+      <span>下载入口待替换为正式地址</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
